@@ -1,0 +1,1 @@
+pastebin get https://pastebin.com/yecNNiH1 Install.lua
