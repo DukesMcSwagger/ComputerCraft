@@ -2,7 +2,7 @@ local utils = require("Utils")
 local io = require("FileManager")
 
 function M.GetRedstoneLevel()
-   return tonumber(io.loadValue("BlowerRedstoneLevel"))
+   return io.loadValue("BlowerRedstoneLevel")
 end
 
 function M.SetRedstoneLevel(gasProvider, setValue)
