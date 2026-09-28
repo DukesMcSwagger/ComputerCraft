@@ -31,7 +31,7 @@ local function resolveCommands(args)
     end
 
     if args[3] == "return" then
-        rednet.send(args[4], result)
+        rednet.send(tonumber(args[4]), result)
     end
 end
 

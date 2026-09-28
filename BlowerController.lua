@@ -15,7 +15,7 @@ function M.SetRedstoneLevel(gasProvider, setValue)
 end
 
 function M.GetVolumeTargetValue(gasProvider)
-    return tonumber(gasProvder.getTargetAmount())
+    return gasProvder.getTargetAmount()
 end
 
 function M.SetVolumeTargetValue(gasProvider, setValue)
