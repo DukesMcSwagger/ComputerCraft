@@ -14,18 +14,24 @@ local running = true
 
 local function resolveCommands(args)
 
+    local result = ""
+
     if args[1] == "print" then
         print(args[2])
     elseif args[1] == "setBlowerTarget" then
         blowerController.SetVolumeTargetValue(gasProvider, args[2])
     elseif args[1] == "getBlowerTarget" then
-        print(blowerController.GetVolumeTargetValue(gasProvider))
+        result = blowerController.GetVolumeTargetValue(gasProvider)
     elseif args[1] == "setRedstoneLevel" then
         blowerController.SetRedstoneLevel(gasProvider, args[2])
     elseif args[1] == "getRedstoneLevel" then
-        print(blowerController.GetRedstoneLevel())
+        result = blowerController.GetRedstoneLevel()
     else 
         print("Unrecognized Command")
+    end
+
+    if args[3] == "return" then
+        rednet.send(args[4], result)
     end
 end
 

@@ -1,10 +1,8 @@
 local utils = require("Utils")
 local io = require("FileManager")
 
---test
-
 function M.GetRedstoneLevel()
-   return io.loadValue("BlowerRedstoneLevel")
+   return tonumber(io.loadValue("BlowerRedstoneLevel"))
 end
 
 function M.SetRedstoneLevel(gasProvider, setValue)
@@ -17,7 +15,7 @@ function M.SetRedstoneLevel(gasProvider, setValue)
 end
 
 function M.GetVolumeTargetValue(gasProvider)
-    return gasProvder.getTargetAmount()
+    return tonumber(gasProvder.getTargetAmount())
 end
 
 function M.SetVolumeTargetValue(gasProvider, setValue)
