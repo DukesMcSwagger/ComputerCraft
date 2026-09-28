@@ -20,7 +20,7 @@ local function resolveCommands(args)
     if args[1] == "print" then
         print(args[2])
     elseif args[1] == "setBlowerTarget" then
-        blowerController.SetVolumeTargetValue(gasProvider, args[2])
+        blowerController.SetVolumeTargetValue(gasProvider, tonumber(args[2]))
     elseif args[1] == "getBlowerTarget" then
         result = blowerController.GetVolumeTargetValue(gasProvider)
     elseif args[1] == "setRedstoneLevel" then
