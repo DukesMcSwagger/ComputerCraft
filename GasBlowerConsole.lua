@@ -14,6 +14,7 @@ local running = true
 
 local function resolveCommands(args)
 
+    local _ = false
     local result = ""
 
     if args[1] == "print" then
@@ -25,7 +26,7 @@ local function resolveCommands(args)
     elseif args[1] == "setRedstoneLevel" then
         blowerController.SetRedstoneLevel(gasProvider, args[2])
     elseif args[1] == "getRedstoneLevel" then
-        result = blowerController.GetRedstoneLevel()
+        _, result = blowerController.GetRedstoneLevel()
     else 
         print("Unrecognized Command")
     end
