@@ -1,7 +1,5 @@
 -- message_interface.lua
 
---specifically for the demo
-
 local utils = require("Utils")
 local blowerController = require("BlowerController")
 
@@ -13,6 +11,23 @@ if os.getComputerLabel() ~= "ide" then
 end
 
 local running = true
+
+local function resolveCommands(args)
+
+    if args[1] == "print" then
+        print(args[2])
+    elseif args[1] == "setBlowerTarget" then
+        blowerController.SetVolumeTargetValue(gasProvider, args[2])
+    elseif args[1] == "getBlowerTarget" then
+        print(blowerController.GetVolumeTargetValue(gasProvider))
+    elseif args[1] == "setRedstoneLevel" then
+        blowerController.SetRedstoneLevel(gasProvider, args[2])
+    elseif args[1] == "getRedstoneLevel" then
+        print(blowerController.GetRedstoneLevel())
+    else 
+        print("Unrecognized Command")
+    end
+end
 
 -- Displays incoming Rednet messages
 local function rednetListener()
@@ -30,6 +45,8 @@ local function rednetListener()
 
             write("> ")
         end
+
+        resolveCommands(utils.split(message, " " ))
     end
 end
 
@@ -53,20 +70,7 @@ local function commandLine()
 
         elseif input ~= "" then
             args = utils.split(input, " ")
-            
-            if args[1] == "print" then
-                print(args[2])
-            elseif args[1] == "setBlowerTarget" then
-                blowerController.SetVolumeTargetValue(gasProvider, args[2])
-            elseif args[1] == "getBlowerTarget" then
-                print(blowerController.GetVolumeTargetValue(gasProvider))
-            elseif args[1] == "setRedstoneLevel" then
-                blowerController.SetRedstoneLevel(gasProvider, args[2])
-            elseif args[1] == "getRedstoneLevel" then
-                print(blowerController.GetRedstoneLevel())
-            else 
-                print("Unrecognized Command")
-            end
+            resolveCommands(args)
         end
     end
 end
