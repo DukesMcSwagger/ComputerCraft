@@ -31,9 +31,10 @@ end
 local running = true
 local autoHeightEnabled = true
 local debug = true
+local printCheck = true
 
 local function debugPrint(message)
-    if debug then
+    if debug and printCheck then
         print(message)
     end
 end
@@ -122,7 +123,7 @@ local function commandLine()
 end
 
 local function autoHeight()
-while running do
+    while running do
         if autoHeightEnabled == true then
             term.clear()
             local currentHeight = tonumber(string.format("%.3f", altitudeSensorController.GetHeight(altitudeSensor)))
@@ -141,11 +142,20 @@ while running do
             blowerController.SetVolumeTargetValue(gasProvider, tonumber(tonumber(targetVolume) + output))
 
             debugPrint("AutoHeight Volume Target: " .. tostring(tonumber(targetVolume) + output))
+
+            printCheck = false
         else
             redstone.setOutput(peripheral.getName(gasProvider), false)
         end
 
         sleep(autoHeightUpdateInterval)
+    end
+end
+
+local function screenRefresh()
+    while running do
+        printCheck = true
+        sleep(screenRefreshTime)
     end
 end
 
@@ -157,7 +167,8 @@ print()
 parallel.waitForAny(
     rednetListener,
     commandLine,
-    autoHeight
+    autoHeight,
+    screenRefresh
 )
 
 if os.getComputerLabel() ~= "ide" then
