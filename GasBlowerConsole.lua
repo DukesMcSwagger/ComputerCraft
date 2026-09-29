@@ -9,11 +9,12 @@ local modem = peripheral.find("modem")
 local gasProvider = peripheral.find("gas_provider")
 local altitudeSensor = peripheral.find("altitude_sensor")
 
-redstone.setOutput(peripheral.getName(gasProvider), true)
+redstone.setAnalogOutput(peripheral.getName(gasProvider), 15)
 
 local autoHeightUpdateInterval = .05
 local volumeSteps = 5
 local screenRefreshTime = 1
+local printing = false
 
 local volumePID = pid.new(1, 1, 2000, {
     minOutput = -10,
@@ -35,7 +36,7 @@ local debug = true
 local printCheck = true
 
 local function debugPrint(message)
-    if debug and printCheck then
+    if debug and printCheck or printing then
         print(message)
     end
 end
@@ -126,6 +127,10 @@ end
 local function autoHeight()
     while running do
         if autoHeightEnabled == true then
+            if printCheck then
+                printing = true
+                printCheck = false
+            end
             local currentHeight = tonumber(string.format("%.3f", altitudeSensorController.GetHeight(altitudeSensor)))
             local targetHeight = altitudeSensorController.GetTargetHeight()
             local targetVolume = blowerController.GetVolumeTargetValue(gasProvider)
@@ -143,7 +148,7 @@ local function autoHeight()
 
             debugPrint("AutoHeight Volume Target: " .. tostring(tonumber(targetVolume) + output))
 
-            printCheck = false
+            printing = false
         else
             redstone.setOutput(peripheral.getName(gasProvider), false)
         end
