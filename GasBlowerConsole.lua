@@ -16,7 +16,7 @@ local volumeSteps = 5
 local screenRefreshTime = 1
 local printing = false
 
-local volumePID = pid.new(1, 5, 2000, {
+local volumePID = pid.new(1, 5, 5000, {
     minOutput = -10,
     maxOutput = 10,
 
