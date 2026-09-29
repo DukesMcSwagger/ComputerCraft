@@ -8,11 +8,15 @@ function M.GetHeight(altitudeSensor)
 end
 
 function M.GetTargetHeight()
-   io.loadValue("TargetHeight")
+   local _, value = io.loadValue("TargetHeight")
+   return value
 end
 
 function M.SetTargetHeight(setValue)
-    io.saveValue("TargetHeight", setValue)
+    local fileName = "TargetHeight"
+    if io.saveValue(fileName, setValue) then
+        print(fileName .. " created")
+    end
 end
 
 return M
