@@ -13,7 +13,7 @@ function M.SetRedstoneLevel(gasProvider, setValue)
         return 15
     end
 
-    local rounded = Math.floor(tonumber(setValue) + 0.5)
+    local rounded = math.floor(tonumber(setValue) + 0.5)
 
     local result = io.saveValue("BlowerRedstoneLevel", rounded)
     if result then
