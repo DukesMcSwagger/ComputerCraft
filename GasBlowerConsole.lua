@@ -124,6 +124,7 @@ end
 local function autoHeight()
 while running do
         if autoHeightEnabled == true then
+            os.execute("clear")
             local currentHeight = tonumber(string.format("%.3f", altitudeSensorController.GetHeight(altitudeSensor)))
             local targetHeight = altitudeSensorController.GetTargetHeight()
             local targetVolume = blowerController.GetVolumeTargetValue(gasProvider)
