@@ -9,7 +9,7 @@ local modem = peripheral.find("modem")
 local gasProvider = peripheral.find("gas_provider")
 local altitudeSensor = peripheral.find("altitude_sensor")
 
-local redstonePID = pid.new(.5, 0, 5, {
+local redstonePID = pid.new(.005, 0, 7, {
     minOutput = -1,
     maxOutput = 1,
 
