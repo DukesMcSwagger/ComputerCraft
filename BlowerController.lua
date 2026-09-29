@@ -28,6 +28,9 @@ function M.GetVolumeTargetValue(gasProvider)
 end
 
 function M.SetVolumeTargetValue(gasProvider, setValue)
+    if not (type(setValue) == "number") then
+        print("Attempted to set Volume to NaN, TargetAmount unchanged.")
+    end
     return gasProvider.setTargetAmount(setValue)
 end
 
