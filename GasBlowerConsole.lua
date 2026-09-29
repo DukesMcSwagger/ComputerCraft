@@ -10,8 +10,8 @@ local gasProvider = peripheral.find("gas_provider")
 local altitudeSensor = peripheral.find("altitude_sensor")
 
 local redstonePID = pid.new(.005, 0, 7, {
-    minOutput = -1,
-    maxOutput = 1,
+    minOutput = -3,
+    maxOutput = 3,
 
     integralMin = -100,
     integralMax = 100,
