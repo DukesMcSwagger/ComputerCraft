@@ -17,8 +17,8 @@ local redstonePID = pid.new(.2, 10, 1200, {
     minOutput = -10,
     maxOutput = 10,
 
-    integralMin = -15,
-    integralMax = 15,
+    integralMin = -5,
+    integralMax = 5,
 
     dt = 1
 })
