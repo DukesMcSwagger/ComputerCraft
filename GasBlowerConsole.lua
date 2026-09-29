@@ -131,7 +131,6 @@ end
 local function autoHeight()
     while running do
         if autoHeightEnabled == true then
-            redstone.setOutput(peripheral.getName(gasProvider), true)
             local currentHeight = altitudeSensorController.GetHeight(altitudeSensor)
             local targetHeight = altitudeSensorController.GetTargetHeight()
             local _, redstoneLevel = blowerController.GetRedstoneLevel()
