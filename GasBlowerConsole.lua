@@ -12,6 +12,7 @@ local altitudeSensor = peripheral.find("altitude_sensor")
 redstone.setOutput(peripheral.getName(gasProvider), true)
 
 local autoHeightUpdateInterval = .05
+local volumeSteps = 50
 
 local volumePID = pid.new(1, 0, 0, {
     minOutput = -10,
@@ -121,7 +122,7 @@ local function commandLine()
 end
 
 local function autoHeight()
-    while running do
+while running do
         if autoHeightEnabled == true then
             local currentHeight = altitudeSensorController.GetHeight(altitudeSensor)
             local targetHeight = altitudeSensorController.GetTargetHeight()
@@ -132,9 +133,11 @@ local function autoHeight()
 
             local output = volumePID:update(tonumber(currentHeight), tonumber(targetHeight))
 
+            output = output * volumeSteps
+
             debugPrint("AutoHeight PID Output: " .. output)
 
-            blowerController.SetRedstoneLevel(gasProvider, tonumber(tonumber(targetVolume) + output))
+            blowerController.SetVolumeTargetValue(gasProvider, tonumber(tonumber(targetVolume) + output))
 
             debugPrint("AutoHeight Volume Target: " .. tostring(tonumber(targetVolume) + output))
         else
