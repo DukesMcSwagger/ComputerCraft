@@ -126,11 +126,13 @@ local function autoHeight()
             local currentHeight = altitudeSensorController.GetHeight(altitudeSensor)
             local targetHeight = altitudeSensorController.GetTargetHeight()
 
-            local output = redstonePID:update(currentHeight, targetHeight)
+            debugPrint("AutoHeight Target Height: " .. tostring(targetHeight))
+
+            local output = redstonePID:update(tonumber(currentHeight), tonumber(targetHeight))
 
             debugPrint("AutoHeight PID Output: " .. output)
 
-            blowerController.SetRedstoneLevel(gasProvider, output)
+            blowerController.SetRedstoneLevel(gasProvider, tonumber(output))
         else
             redstone.setOutput(peripheral.getName(gasProvider), false)
         end
