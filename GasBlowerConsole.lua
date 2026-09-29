@@ -9,7 +9,7 @@ local modem = peripheral.find("modem")
 local gasProvider = peripheral.find("gas_provider")
 local altitudeSensor = peripheral.find("altitude_sensor")
 
-local autoHeightUpdateInterval = 1
+local autoHeightUpdateInterval = .2
 
 local redstonePID = pid.new(.2, 10, 800, {
     minOutput = -10,
