@@ -6,6 +6,12 @@ function M.GetRedstoneLevel()
 end
 
 function M.SetRedstoneLevel(gasProvider, setValue)
+    if setValue < 0 then
+        return 0
+    end
+    if setValue > 15 then
+        return 15
+    end
     local result = io.saveValue("BlowerRedstoneLevel", setValue)
     if result then
         local _,redstoneLevel = M.GetRedstoneLevel()
