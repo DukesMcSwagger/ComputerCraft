@@ -58,11 +58,12 @@ local function resolveCommands(args)
         blowerController.SetRedstoneLevel(gasProvider, args[2])
     elseif args[1] == "getRedstoneLevel" then
         _, result = blowerController.GetRedstoneLevel()
-    elseif args[1] == "autoHeight" then
+    elseif args[1] == "setAutoHeight" then
         autoHeightEnabled = utils.ternary(args[2], true, false)
+        print("Autoheight set to " .. autoHeightEnabled)
     elseif args[1] == "setTargetHeight" then
         altitudeSensorController.SetTargetHeight(args[2])
-    elseif args[1] == "setDeubug" then
+    elseif args[1] == "setDebug" then
         debug = utils.ternary(args[2], true, false)
     else 
         print("Unrecognized Command")
