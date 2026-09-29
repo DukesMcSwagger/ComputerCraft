@@ -34,7 +34,7 @@ if os.getComputerLabel() ~= "ide" then
 end
 
 local running = true
-local autoHeightEnabled = false
+local autoHeightEnabled = falste
 local debug = true
 
 local function debugPrint(message)
@@ -60,7 +60,7 @@ local function resolveCommands(args)
         _, result = blowerController.GetRedstoneLevel()
     elseif args[1] == "setAutoHeight" then
         autoHeightEnabled = utils.ternary(args[2], true, false)
-        print("Autoheight set to " .. toString(autoHeightEnabled))
+        print("Autoheight set to " .. tostring(autoHeightEnabled))
     elseif args[1] == "setTargetHeight" then
         altitudeSensorController.SetTargetHeight(args[2])
     elseif args[1] == "setDebug" then
