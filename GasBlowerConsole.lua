@@ -20,8 +20,8 @@ local volumePID = pid.new(1, 1, 2000, {
     minOutput = -10,
     maxOutput = 10,
 
-    integralMin = -5,
-    integralMax = 5,
+    integralMin = -25,
+    integralMax = 25,
 
     dt = 1
 })
