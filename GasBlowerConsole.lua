@@ -130,7 +130,7 @@ local function autoHeight()
         if autoHeightEnabled == true then
             local currentHeight = altitudeSensorController.GetHeight(altitudeSensor)
             local targetHeight = altitudeSensorController.GetTargetHeight()
-            local redstoneLevel = blowerController.GetRedstoneLevel()
+            local _, redstoneLevel = blowerController.GetRedstoneLevel()
 
             debugPrint("AutoHeight Target Height: " .. tostring(targetHeight))
             debugPrint("AutoHeight Current Height: " .. tostring(currentHeight))
