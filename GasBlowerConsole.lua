@@ -14,7 +14,7 @@ redstone.setOutput(peripheral.getName(gasProvider), true)
 local autoHeightUpdateInterval = .05
 local volumeSteps = 5
 
-local volumePID = pid.new(1, 0, 2000, {
+local volumePID = pid.new(1, 1, 2000, {
     minOutput = -10,
     maxOutput = 10,
 
