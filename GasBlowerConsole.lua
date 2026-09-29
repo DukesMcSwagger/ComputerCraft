@@ -140,6 +140,8 @@ local function autoHeight()
             debugPrint("AutoHeight PID Output: " .. output)
 
             blowerController.SetRedstoneLevel(gasProvider, tonumber(redstoneLevel + output))
+
+            debugPrint("AutoHeight Redstone Level: " .. tostring(redstoneLevel + output))
         else
             redstone.setOutput(peripheral.getName(gasProvider), false)
         end
