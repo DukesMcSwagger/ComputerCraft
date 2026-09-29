@@ -2,15 +2,46 @@
 
 local utils = require("Utils")
 local blowerController = require("BlowerController")
+local pid = require("Pid")
+local altitudeSensorController = require("AltitudeSensorController")
 
 local modem = peripheral.find("modem")
 local gasProvider = peripheral.find("gas_provider")
+local altitudeSensor = peripheral.find("altitiude_sensor")
+
+local redstonePID = pid.new(2, 0.05, 0.5, {
+    minOutput = 0,
+    maxOutput = 15,
+
+    integralMin = -100,
+    integralMax = 100,
+
+    dt = 1
+})
+
+local volumePID = pid.new(2, 0.05, 0.5, {
+    minOutput = 0,
+    maxOutput = 500,
+
+    integralMin = -100,
+    integralMax = 100,
+
+    dt = 1
+})
 
 if os.getComputerLabel() ~= "ide" then
     rednet.open(peripheral.getName(modem))
 end
 
 local running = true
+local autoHeightEnabled = false
+local debug = false
+
+local function debugPrint(message)
+    if debug then
+        print(message)
+    end
+end
 
 local function resolveCommands(args)
 
@@ -27,6 +58,12 @@ local function resolveCommands(args)
         blowerController.SetRedstoneLevel(gasProvider, args[2])
     elseif args[1] == "getRedstoneLevel" then
         _, result = blowerController.GetRedstoneLevel()
+    elseif args[1] == "autoHeight" then
+        autoHeightEnabled = utils.ternary(args[2], true, false)
+    elseif args[1] == "setTargetHeight" then
+        altitudeSensorController.SetTargetHeight(args[2])
+    elseif args[1] == "setDeubug" then
+        debug = utils.ternary(args[2], true, false)
     else 
         print("Unrecognized Command")
     end
@@ -82,6 +119,23 @@ local function commandLine()
     end
 end
 
+local function autoHeight()
+    while running do
+        if autoHeightEnabled == true then
+            local currentHeight = altitudeSensorController.GetHeight(altitudeSensor)
+            local targetHeight = altitudeSensorController.GetTargetHeight()
+
+            local output = redstonePID:update(currentHeight, targetHeight)
+
+            debugPrint("AutoHeight PID Output: " .. output)
+
+            blowerController.SetRedstoneLevel(gasProvider, output)
+        else
+            redstone.setOutput(peripheral.getName(gasProvider), false)
+        end
+    end
+end
+
 print("Rednet interface started.")
 print("Computer ID: " .. os.getComputerID())
 print("Type 'exit' to quit.")
@@ -89,7 +143,8 @@ print()
 
 parallel.waitForAny(
     rednetListener,
-    commandLine
+    commandLine,
+    autoHeight
 )
 
 if os.getComputerLabel() ~= "ide" then

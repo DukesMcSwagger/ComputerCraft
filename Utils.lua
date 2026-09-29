@@ -15,4 +15,12 @@ function M.split(str, sep)
     return result
 end
 
+function M.ternary(condition, ifTrue, ifFalse)
+    if condition then
+        return a
+    else
+        return b
+    end
+end
+
 return M
