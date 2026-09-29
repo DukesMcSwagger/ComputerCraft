@@ -34,7 +34,7 @@ if os.getComputerLabel() ~= "ide" then
 end
 
 local running = true
-local autoHeightEnabled = true
+local autoHeightEnabled = false
 local debug = true
 
 local function debugPrint(message)
