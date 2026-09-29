@@ -18,6 +18,8 @@ function M.SetRedstoneLevel(gasProvider, setValue)
         local _,redstoneLevel = M.GetRedstoneLevel()
         redstone.setAnalogOutput(peripheral.getName(gasProvider), tonumber(redstoneLevel))
         return result
+    else
+        print("ERROR: Unable to read RedstoneLevel when attempting to set")
     end
 end
 
