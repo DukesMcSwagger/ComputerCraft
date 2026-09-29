@@ -136,7 +136,7 @@ local function autoHeight()
 
             blowerController.SetRedstoneLevel(gasProvider, tonumber(tonumber(targetVolume) + output))
 
-            debugPrint("AutoHeight Redstone Level: " .. tostring(tonumber(targetVolume) + output))
+            debugPrint("AutoHeight Volume Target: " .. tostring(tonumber(targetVolume) + output))
         else
             redstone.setOutput(peripheral.getName(gasProvider), false)
         end
