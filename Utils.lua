@@ -17,9 +17,9 @@ end
 
 function M.ternary(condition, ifTrue, ifFalse)
     if condition then
-        return a
+        return ifTrue
     else
-        return b
+        return ifFalse
     end
 end
 
