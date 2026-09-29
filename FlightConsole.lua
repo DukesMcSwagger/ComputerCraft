@@ -20,6 +20,6 @@ while true do
         print("Computer ID: " .. os.getComputerID())
 
     elseif input ~= "" then
-        redstone.send(3, "setTargetHeight " .. tostring(input))
+        rednet.send(3, "setTargetHeight " .. tostring(input))
     end
 end
