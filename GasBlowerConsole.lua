@@ -110,6 +110,7 @@ local function commandLine()
 
         if input == "exit" or input == "quit" then
             running = false
+            redstone.setOutput(peripheral.getName(gasProvider), false)
             print("Shutting down...")
             return
 
