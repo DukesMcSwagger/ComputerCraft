@@ -38,6 +38,7 @@ local function debugPrint(message)
     if debug and printCheck then
         print(message)
     end
+    printCheck = false
 end
 
 local function resolveCommands(args)
@@ -143,8 +144,6 @@ local function autoHeight()
             blowerController.SetVolumeTargetValue(gasProvider, tonumber(tonumber(targetVolume) + output))
 
             debugPrint("AutoHeight Volume Target: " .. tostring(tonumber(targetVolume) + output))
-
-            printCheck = false
         else
             redstone.setOutput(peripheral.getName(gasProvider), false)
         end
