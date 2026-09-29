@@ -15,7 +15,7 @@ function M.SetRedstoneLevel(gasProvider, setValue)
     local result = io.saveValue("BlowerRedstoneLevel", setValue)
     if result then
         local _,redstoneLevel = M.GetRedstoneLevel()
-        redstone.setAnalogOutput(peripheral.getName(gasProvider), tonumber(redstoneLevel))
+        redstone.setAnalogOutput(peripheral.getName(gasProvider), math.floor(tonumber(redstoneLevel) + 0.5))
         return result
     end
 end
