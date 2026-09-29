@@ -7,7 +7,7 @@ local altitudeSensorController = require("AltitudeSensorController")
 
 local modem = peripheral.find("modem")
 local gasProvider = peripheral.find("gas_provider")
-local altitudeSensor = peripheral.find("altitiude_sensor")
+local altitudeSensor = peripheral.find("altitude_sensor")
 
 local redstonePID = pid.new(2, 0.05, 0.5, {
     minOutput = 0,
