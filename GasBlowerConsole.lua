@@ -11,12 +11,12 @@ local altitudeSensor = peripheral.find("altitude_sensor")
 
 local autoHeightUpdateInterval = 1
 
-local redstonePID = pid.new(.2, 5, 800, {
+local redstonePID = pid.new(.2, 10, 800, {
     minOutput = -10,
     maxOutput = 10,
 
-    integralMin = -30,
-    integralMax = 30,
+    integralMin = -50,
+    integralMax = 50,
 
     dt = 1
 })
