@@ -58,6 +58,7 @@ local function resolveCommands(args)
         blowerController.SetRedstoneLevel(gasProvider, args[2])
     elseif args[1] == "getRedstoneLevel" then
         _, result = blowerController.GetRedstoneLevel()
+        print(tostring(result))
     elseif args[1] == "setAutoHeight" then
         autoHeightEnabled = utils.ternary(args[2], true, false)
         print("Autoheight set to " .. tostring(autoHeightEnabled))
