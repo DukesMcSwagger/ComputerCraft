@@ -63,8 +63,10 @@ local function resolveCommands(args)
         print("Autoheight set to " .. tostring(autoHeightEnabled))
     elseif args[1] == "setTargetHeight" then
         altitudeSensorController.SetTargetHeight(args[2])
-    elseif args[1] == "getTargetHeight" then
+    elseif args[1] == "getHeight" then
         print(tostring(altitudeSensorController.GetHeight(altitudeSensor)))
+    elseif args[1] == "getTargetHeight" then
+        print(tostring(altitudeSensorController.GetTargetHeight()))
     elseif args[1] == "setDebug" then
         debug = utils.ternary(args[2], true, false)
     else 
