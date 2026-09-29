@@ -9,9 +9,9 @@ local modem = peripheral.find("modem")
 local gasProvider = peripheral.find("gas_provider")
 local altitudeSensor = peripheral.find("altitude_sensor")
 
-local redstonePID = pid.new(5, 0, 2, {
-    minOutput = -3,
-    maxOutput = 3,
+local redstonePID = pid.new(.5, 0, 2, {
+    minOutput = -1,
+    maxOutput = 1,
 
     integralMin = -100,
     integralMax = 100,
@@ -34,7 +34,7 @@ if os.getComputerLabel() ~= "ide" then
 end
 
 local running = true
-local autoHeightEnabled = falste
+local autoHeightEnabled = true
 local debug = true
 
 local function debugPrint(message)
