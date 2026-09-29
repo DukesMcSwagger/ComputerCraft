@@ -133,6 +133,8 @@ local function autoHeight()
         else
             redstone.setOutput(peripheral.getName(gasProvider), false)
         end
+
+        sleep(1)
     end
 end
 
