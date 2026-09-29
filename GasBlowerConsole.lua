@@ -11,7 +11,7 @@ local altitudeSensor = peripheral.find("altitude_sensor")
 
 redstone.setOutput(peripheral.getName(gasProvider), true)
 
-local autoHeightUpdateInterval = .05
+local autoHeightUpdateInterval = .5
 local volumeSteps = 5
 
 local volumePID = pid.new(1, 0, 0, {
