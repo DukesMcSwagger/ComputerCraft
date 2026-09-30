@@ -13,6 +13,10 @@ function M.GetTargetHeight()
 end
 
 function M.SetTargetHeight(setValue)
+    if not (type(setValue) == "number") then
+        print("Attempted to set Volume to NaN, TargetAmount unchanged.")
+        return
+    end
     local fileName = "TargetHeight"
     if io.saveValue(fileName, setValue) then
         print(fileName .. " created")
